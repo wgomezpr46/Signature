@@ -47,6 +47,10 @@ namespace Signature.WebAPI.Controllers
                     var objTicketPromotionsRequestNew = JsonConvert.DeserializeObject<TicketPromotionsRequest>(jsonString);
                     sGenerateSignatureInput = GenericHelper.GeneratedSignature(objTicketPromotionsRequestNew, strTimeStamp);
                     break;
+                case "/api/Promotion/GetListarPromocionNew/Request":
+                    var objPromocionRequest = JsonConvert.DeserializeObject<CalculoPromocionRequest>(jsonString);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objPromocionRequest, strTimeStamp);
+                    break;
                 case "/SetTicket":
                 case "/SetRefundTicket":
                     var objPOSDocumentsCOFORequest = JsonConvert.DeserializeObject<POSDocumentsCOFORequest>(jsonString);
