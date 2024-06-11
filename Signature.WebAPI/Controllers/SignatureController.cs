@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Signature.WebAPI.Entities.Requests;
 using Signature.WebAPI.Helpers;
+using Signature.WebAPI.Models;
 
 namespace Signature.WebAPI.Controllers
 {
@@ -48,8 +49,8 @@ namespace Signature.WebAPI.Controllers
                     sGenerateSignatureInput = GenericHelper.GeneratedSignature(objTicketPromotionsRequestNew, strTimeStamp);
                     break;
                 case "/api/Promotion/GetListarPromocionNew/Request":
-                    var objPromocionRequest = JsonConvert.DeserializeObject<CalculoPromocionRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objPromocionRequest, strTimeStamp);
+                    var objPromocionRequest = JsonConvert.DeserializeObject<CalculoPromocion>(jsonString);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objPromocionRequest, strTimeStamp);
                     break;
                 case "/SetTicket":
                 case "/SetRefundTicket":

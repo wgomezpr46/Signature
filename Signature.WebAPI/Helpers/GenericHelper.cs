@@ -22,6 +22,13 @@ namespace Signature.WebAPI.Helpers
 #pragma warning restore CS8604 // Possible null reference argument.
         }
 
+        internal static string GeneratedSignatureWSREST(Object? oHash, String sTimeStamp)
+        {
+#pragma warning disable CS8604 // Possible null reference argument.
+            return GenericHelper.GenerateSHA256(OrderObjectPropertiesValuesAlphabetically(oHash) + sTimeStamp + "IntegracionWSREST");
+#pragma warning restore CS8604 // Possible null reference argument.
+        }
+
         /// <summary>
         /// Generates a SHA256 string
         /// </summary>

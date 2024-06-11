@@ -1,8 +1,6 @@
-﻿using Signature.WebAPI.Models;
-
-namespace Signature.WebAPI.Entities.Requests
+﻿namespace Signature.WebAPI.Models
 {
-    public class CalculoPromocionRequest
+    public class CalculoPromocion
     {
         #region Properties
         /// <summary>
