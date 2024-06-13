@@ -14,7 +14,7 @@ namespace Signature.WebAPI.Controllers
         [HttpGet]
         public string Welcome()
         {
-            return "Weilcome Generated Signature!!";
+            return "Welcome to the signature generator!!";
         }
 
         // POST: api/Signature/GeneratedSignature
