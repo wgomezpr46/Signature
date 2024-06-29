@@ -106,11 +106,18 @@
         /// <summary>
         /// Constructor by parameters
         /// </summary>
-        /// <param name="_codigoArticulo"></param>
-        /// <param name="_nombre"></param>
-        /// <param name="_pvp"></param>
-        /// <param name="_iva"></param>
-        /// <param name="_consigna"></param>
+        /// <param name="id"></param>
+        /// <param name="nCompany"></param>
+        /// <param name="date"></param>
+        /// <param name="time"></param>
+        /// <param name="article"></param>
+        /// <param name="units"></param>
+        /// <param name="operato"></param>
+        /// <param name="reason"></param>
+        /// <param name="observations"></param>
+        /// <param name="validated"></param>
+        /// <param name="store"></param>
+        /// <param name="warehouse"></param>
         public AdjustmentsLosses(int id, string nCompany, string date, string time, string article, int units, string operato, string reason, string observations, bool validated, string store, string warehouse)
         {
             Id = id;
