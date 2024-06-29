@@ -15,14 +15,14 @@ namespace Signature.WebAPI.Helpers
         /// <param name="oHash"></param>
         /// <param name="sTimeStamp"></param>
         /// <returns></returns>
-        internal static string GeneratedSignature(Object? oHash, String sTimeStamp)
+        internal static string GeneratedSignature(Object oHash, String sTimeStamp)
         {
 #pragma warning disable CS8604 // Possible null reference argument.
             return GenericHelper.GenerateSHA256(OrderObjectPropertiesValuesAlphabetically(oHash) + sTimeStamp + "IntegracionAPI15032018");
 #pragma warning restore CS8604 // Possible null reference argument.
         }
 
-        internal static string GeneratedSignatureWSREST(Object? oHash, String sTimeStamp)
+        internal static string GeneratedSignatureWSREST(Object oHash, String sTimeStamp)
         {
 #pragma warning disable CS8604 // Possible null reference argument.
             return GenericHelper.GenerateSHA256(OrderObjectPropertiesValuesAlphabetically(oHash) + sTimeStamp + "IntegracionWSREST");
@@ -36,7 +36,7 @@ namespace Signature.WebAPI.Helpers
         /// <returns>hashed string</returns>
         internal static string GenerateSHA256(string stringToHash)
         {
-            string? hashedString = null;
+            string hashedString = null;
 
 #pragma warning disable SYSLIB0021 // Type or member is obsolete
             SHA256 mySHA256 = SHA256Managed.Create();

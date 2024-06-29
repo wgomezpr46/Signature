@@ -2,7 +2,7 @@
 
 namespace Signature.WebAPI.Entities.Requests
 {
-    public class POSDocumentsCOFORequest: IEquatable<POSDocumentsCOFORequest>
+    public class POSDocumentsCOFORequest : IEquatable<POSDocumentsCOFORequest>
     {
         #region Properties
 
@@ -271,7 +271,7 @@ namespace Signature.WebAPI.Entities.Requests
             return Equals((object)other);
         }
 
-        public bool Equals(POSDocumentsCOFORequest? other)
+        public bool Equals(POSDocumentsCOFORequest other)
         {
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.

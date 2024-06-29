@@ -6,23 +6,41 @@ using Signature.WebAPI.Models;
 
 namespace Signature.WebAPI.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SignatureController : ControllerBase
     {
-        // GET: api/Signature/Welcome
-        [HttpGet]
-        public string Welcome()
-        {
-            return "Welcome to the signature generator!!";
-        }
-
+        /// <summary>
+        /// Genera firma a partir de un payload enviado en el cuerpo de cada solicitud.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>retorna firma</returns>
+        /// <remarks>
+        /// Sample body request:
+        ///
+        ///     POST /GetArticle
+        ///     {
+        ///        "CodigoEmpresa": "69947",
+        ///        "CodigoEAN": "",
+        ///        "Referencia": "69947876673",
+        ///        "Caja": "6994701"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">SHA256 string signature.</response>
+        /// <response code="400">TimeStamp y Endpoint son obligatorios || Endpoint '{Endpoint}' no es válido.</response>
         // POST: api/Signature/GeneratedSignature
         [HttpPost]
-        public string GeneratedSignature(Object request)
+        public IActionResult GeneratedSignature([FromBody] Object request)
         {
             Request.Headers.TryGetValue("TimeStamp", out var strTimeStamp);
             Request.Headers.TryGetValue("Endpoint", out var strEndpoint);
+
+            if (string.IsNullOrEmpty(strTimeStamp) || string.IsNullOrEmpty(strEndpoint))
+            {
+                return BadRequest(new { error = "TimeStamp y Endpoint son obligatorios" });
+            }
 
             var options = new System.Text.Json.JsonSerializerOptions
             {
@@ -30,7 +48,7 @@ namespace Signature.WebAPI.Controllers
                 PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
             };
 
-            var jsonString = System.Text.Json.JsonSerializer.Serialize(request, options);
+            string jsonString = System.Text.Json.JsonSerializer.Serialize(request, options);
             string sGenerateSignatureInput = string.Empty;
 
             switch (strEndpoint.ToString())
@@ -98,10 +116,10 @@ namespace Signature.WebAPI.Controllers
                 case "/TransactionStatus": //No se encuentra el Endpoint en COFOWSAPITPV
                     break;
                 default:
-                    break;
+                    return BadRequest(new { error = $"Endpoint '{strEndpoint}' no es válido" });
             }
 
-            return sGenerateSignatureInput;
+            return Ok(sGenerateSignatureInput);
         }
     }
 }
