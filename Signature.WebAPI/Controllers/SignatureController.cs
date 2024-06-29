@@ -55,6 +55,8 @@ namespace Signature.WebAPI.Controllers
             {
                 case "/GetArticle":
                 case "/GetArticleType":
+                case "/ilionservices4/COFOWSAPITPV/GetArticle":
+                case "/ilionservices4/COFOWSInterface/api/Article/GetArticle/request":
                     var objArticleRequest = JsonConvert.DeserializeObject<ArticleRequest>(jsonString);
                     sGenerateSignatureInput = GenericHelper.GeneratedSignature(objArticleRequest, strTimeStamp);
                     break;
@@ -64,10 +66,13 @@ namespace Signature.WebAPI.Controllers
                     break;
                 case "/GetPromotionsNew":
                 case "/ilionservices4/COFOWSAPITPV/GetPromotionsNew":
+                case "/ilionServices4/COFOWSAPITPV/GetPromotionsNew":
                     var objTicketPromotionsRequestNew = JsonConvert.DeserializeObject<TicketPromotionsRequest>(jsonString);
                     sGenerateSignatureInput = GenericHelper.GeneratedSignature(objTicketPromotionsRequestNew, strTimeStamp);
                     break;
                 case "/api/Promotion/GetListarPromocionNew/Request":
+                case "/ilionservices4/COFOWSInterface/api/Promotion/GetListarPromocionNew/Request":
+                case "/IlionServices4/COFOWSInterface/api/Article/GetArticle/request":
                     var objPromocionRequest = JsonConvert.DeserializeObject<CalculoPromocion>(jsonString);
                     sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objPromocionRequest, strTimeStamp);
                     break;
@@ -114,6 +119,10 @@ namespace Signature.WebAPI.Controllers
                     sGenerateSignatureInput = GenericHelper.GeneratedSignature(objFamiliesRequest, strTimeStamp);
                     break;
                 case "/TransactionStatus": //No se encuentra el Endpoint en COFOWSAPITPV
+                    break;
+                case "/api/DeliveryNotes/COFOSetDeliveryNotesHandHeld/request":
+                    var objErpDeliveryNotesHHLegacy = JsonConvert.DeserializeObject<ErpDeliveryNotesHHLegacy>(jsonString);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objErpDeliveryNotesHHLegacy, strTimeStamp);
                     break;
                 default:
                     return BadRequest(new { error = $"Endpoint '{strEndpoint}' no es válido" });
