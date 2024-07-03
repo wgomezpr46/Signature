@@ -15,7 +15,7 @@ namespace Signature.WebAPI.Helpers
         /// <param name="oHash"></param>
         /// <param name="sTimeStamp"></param>
         /// <returns></returns>
-        internal static string GeneratedSignature(Object oHash, String sTimeStamp)
+        internal static string GeneratedSignatureWSAPITPV(Object oHash, String sTimeStamp)
         {
 #pragma warning disable CS8604 // Possible null reference argument.
             return GenericHelper.GenerateSHA256(OrderObjectPropertiesValuesAlphabetically(oHash) + sTimeStamp + "IntegracionAPI15032018");

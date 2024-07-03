@@ -57,66 +57,68 @@ namespace Signature.WebAPI.Controllers
                 case "/GetArticleType":
                 case "/ilionservices4/COFOWSAPITPV/GetArticle":
                 case "/ilionservices4/COFOWSInterface/api/Article/GetArticle/request":
+                case "/IlionServices4/COFOWSInterface/api/Article/GetArticle/request":
                     var objArticleRequest = JsonConvert.DeserializeObject<ArticleRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objArticleRequest, strTimeStamp);
+                    if (strEndpoint.ToString().Contains("COFOWSAPITPV")) { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticleRequest, strTimeStamp); }
+                    if (strEndpoint.ToString().Contains("COFOWSInterface")) { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objArticleRequest, strTimeStamp); }
+
                     break;
                 case "/GetPromotions":
                     var objTicketPromotionsRequest = JsonConvert.DeserializeObject<TicketPromotionsRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objTicketPromotionsRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objTicketPromotionsRequest, strTimeStamp);
                     break;
                 case "/GetPromotionsNew":
                 case "/ilionservices4/COFOWSAPITPV/GetPromotionsNew":
                 case "/ilionServices4/COFOWSAPITPV/GetPromotionsNew":
                     var objTicketPromotionsRequestNew = JsonConvert.DeserializeObject<TicketPromotionsRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objTicketPromotionsRequestNew, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objTicketPromotionsRequestNew, strTimeStamp);
                     break;
                 case "/api/Promotion/GetListarPromocionNew/Request":
                 case "/ilionservices4/COFOWSInterface/api/Promotion/GetListarPromocionNew/Request":
-                case "/IlionServices4/COFOWSInterface/api/Article/GetArticle/request":
                     var objPromocionRequest = JsonConvert.DeserializeObject<CalculoPromocion>(jsonString);
                     sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objPromocionRequest, strTimeStamp);
                     break;
                 case "/SetTicket":
                 case "/SetRefundTicket":
                     var objPOSDocumentsCOFORequest = JsonConvert.DeserializeObject<POSDocumentsCOFORequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objPOSDocumentsCOFORequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objPOSDocumentsCOFORequest, strTimeStamp);
                     break;
                 case "/GetDeliveryNotes":
                     var objDeliveryNotesRequest = JsonConvert.DeserializeObject<DeliveryNotesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objDeliveryNotesRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objDeliveryNotesRequest, strTimeStamp);
                     break;
                 case "/GetDeliveryNotesV2":
                     var objDeliveryNotesRequestV2 = JsonConvert.DeserializeObject<DeliveryNotesRequestV2>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objDeliveryNotesRequestV2, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objDeliveryNotesRequestV2, strTimeStamp);
                     break;
                 case "/ListArticlesPaged":
                     var objArticlesRequest = JsonConvert.DeserializeObject<ArticlesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objArticlesRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticlesRequest, strTimeStamp);
                     break;
                 case "/ListArticlesPagedFamilies":
                     var objArticlesRequest_ = JsonConvert.DeserializeObject<ArticlesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objArticlesRequest_, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticlesRequest_, strTimeStamp);
                     break;
                 case "/GetSettingsLosses":
                     var objSettingsLossesRequest = JsonConvert.DeserializeObject<SettingsLossesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objSettingsLossesRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objSettingsLossesRequest, strTimeStamp);
                     break;
                 case "/SetAdjustmentsLosses":
                     var objSetAdjustmentsLossesRequest = JsonConvert.DeserializeObject<SetAdjustmentsLossesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objSetAdjustmentsLossesRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objSetAdjustmentsLossesRequest, strTimeStamp);
                     break;
                 case "/SetClosingCash":
                 case "/SetClosingCashTransaction": //No se encuentra el Endpoint en COFOWSAPITPV
                     var objCashRequest = JsonConvert.DeserializeObject<CashRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objCashRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objCashRequest, strTimeStamp);
                     break;
                 case "/GetFailedTickets":
                     var objFailedTicketRequest = JsonConvert.DeserializeObject<FailedTicketRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objFailedTicketRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objFailedTicketRequest, strTimeStamp);
                     break;
                 case "/GetFamilies":
                     var objFamiliesRequest = JsonConvert.DeserializeObject<FamiliesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignature(objFamiliesRequest, strTimeStamp);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objFamiliesRequest, strTimeStamp);
                     break;
                 case "/TransactionStatus": //No se encuentra el Endpoint en COFOWSAPITPV
                     break;
