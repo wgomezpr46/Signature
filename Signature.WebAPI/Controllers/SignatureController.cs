@@ -61,7 +61,7 @@ namespace Signature.WebAPI.Controllers
                     var objArticleRequest = JsonConvert.DeserializeObject<ArticleRequest>(jsonString);
                     if (strEndpoint.ToString().Contains("COFOWSAPITPV")) { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticleRequest, strTimeStamp); }
                     if (strEndpoint.ToString().Contains("COFOWSInterface")) { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objArticleRequest, strTimeStamp); }
-
+                    else { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticleRequest, strTimeStamp); }
                     break;
                 case "/GetPromotions":
                     var objTicketPromotionsRequest = JsonConvert.DeserializeObject<TicketPromotionsRequest>(jsonString);
