@@ -121,10 +121,18 @@ namespace Signature.WebAPI.Controllers
                     sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objFamiliesRequest, strTimeStamp);
                     break;
                 case "/TransactionStatus": //No se encuentra el Endpoint en COFOWSAPITPV
+                case "/ilionservices4/COFOWSInterface/api/ClosingCash/TransactionStatus/request":
+                case "/api/ClosingCash/TransactionStatus/request":
+                    var objTransactionStatusRequest = JsonConvert.DeserializeObject<TransactionStatusRequest>(jsonString);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objTransactionStatusRequest, strTimeStamp);
                     break;
                 case "/api/DeliveryNotes/COFOSetDeliveryNotesHandHeld/request":
                     var objErpDeliveryNotesHHLegacy = JsonConvert.DeserializeObject<ErpDeliveryNotesHHLegacy>(jsonString);
                     sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objErpDeliveryNotesHHLegacy, strTimeStamp);
+                    break;
+                case "/SupplierOrders/COFOSetSupplierOrdersConts/request":
+                    var objSupplierOrders = JsonConvert.DeserializeObject<SupplierOrders>(jsonString);
+                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objSupplierOrders, strTimeStamp);
                     break;
                 default:
                     return BadRequest(new { error = $"Endpoint '{strEndpoint}' no es válido" });
