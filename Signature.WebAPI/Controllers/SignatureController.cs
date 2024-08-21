@@ -92,8 +92,13 @@ namespace Signature.WebAPI.Controllers
                     sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objDeliveryNotesRequestV2, strTimeStamp);
                     break;
                 case "/ListArticlesPaged":
+                case "/IlionServices4/COFOWSInterface/api/ArticlesPaged/ListArticlesPagedFamilies/request":
+                case "/api/ArticlesPaged/ListArticlesPagedFamilies/request":
+                case "/ilionservices4/COFOWSInterface/api/ArticlesPaged/ListArticlesPagedFamilies/request":
                     var objArticlesRequest = JsonConvert.DeserializeObject<ArticlesRequest>(jsonString);
-                    sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticlesRequest, strTimeStamp);
+                    if (strEndpoint.ToString().Contains("COFOWSAPITPV")) { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objArticlesRequest, strTimeStamp); }
+                    if (strEndpoint.ToString().Contains("COFOWSInterface")) { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objArticlesRequest, strTimeStamp); }
+                    else { sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objArticlesRequest, strTimeStamp); }
                     break;
                 case "/ListArticlesPagedFamilies":
                     var objArticlesRequest_ = JsonConvert.DeserializeObject<ArticlesRequest>(jsonString);
