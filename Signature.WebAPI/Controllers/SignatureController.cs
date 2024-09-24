@@ -11,13 +11,6 @@ namespace Signature.WebAPI.Controllers
     [ApiController]
     public class SignatureController : ControllerBase
     {
-        public string TimeStamp { get; set; }
-
-        public SignatureController()
-        {
-            TimeStamp = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-        }
-
         /// <summary>
         /// Genera firma a partir de un payload enviado en el cuerpo de cada solicitud.
         /// </summary>
@@ -63,14 +56,16 @@ namespace Signature.WebAPI.Controllers
                 return BadRequest(new { error = "TimeStamp y Endpoint son obligatorios" });
             }
 
+#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
             var options = new System.Text.Json.JsonSerializerOptions
             {
                 WriteIndented = true,
                 PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
             };
+#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
 
             string jsonString = System.Text.Json.JsonSerializer.Serialize(request, options);
-            string sGenerateSignatureInput = string.Empty;
+            string sGenerateSignatureInput;
 
             switch (strEndpoint.ToString())
             {
