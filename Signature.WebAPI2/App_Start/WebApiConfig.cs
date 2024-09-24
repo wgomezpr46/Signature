@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace Signature.WebAPI2
 {
@@ -13,12 +10,8 @@ namespace Signature.WebAPI2
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.Routes.MapHttpRoute(name: "RootApi", routeTemplate: "", defaults: new { controller = "Default", action = "Get" });
+            config.Routes.MapHttpRoute(name: "DefaultApi", routeTemplate: "api/{controller}/{action}", defaults: new { controller = "Default", action = "Get" });
         }
     }
 }
