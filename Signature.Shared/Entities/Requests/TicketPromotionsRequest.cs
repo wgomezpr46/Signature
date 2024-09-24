@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Signature.WebAPI.Entities.Requests
+namespace Signature.Shared.Entities.Requests
 {
     public class TicketPromotionsRequest : IEquatable<TicketPromotionsRequest>
     {
@@ -62,9 +62,7 @@ namespace Signature.WebAPI.Entities.Requests
         /// Use Articulo.Builder() for instance creation instead.
         /// </summary>
         //[Obsolete]
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public TicketPromotionsRequest()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
         #endregion
@@ -248,16 +246,12 @@ namespace Signature.WebAPI.Entities.Requests
             return ToString();
         }
 
-#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         public override bool Equals(object obj)
-#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         {
             return Equals(obj);
         }
 
-#pragma warning disable CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
         public bool Equals(TicketPromotionsRequest other)
-#pragma warning restore CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
         {
             return Equals((object)other);
         }

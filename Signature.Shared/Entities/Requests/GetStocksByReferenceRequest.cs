@@ -1,4 +1,4 @@
-﻿namespace Signature.WebAPI.Entities.Requests
+﻿namespace Signature.Shared.Entities.Requests
 {
     public class GetStocksByReferenceRequest
     {

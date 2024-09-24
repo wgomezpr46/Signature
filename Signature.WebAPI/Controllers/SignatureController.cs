@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Signature.WebAPI.Entities.Requests;
-using Signature.WebAPI.Helpers;
-using Signature.WebAPI.Models;
+using Signature.Shared.Entities.Requests;
+using Signature.Shared.Helpers;
+using Signature.Shared.Models;
 
 namespace Signature.WebAPI.Controllers
 {

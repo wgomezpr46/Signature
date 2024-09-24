@@ -1,4 +1,4 @@
-﻿namespace Signature.WebAPI.Entities.Reposnse
+﻿namespace Signature.Shared.Entities.Reposnse
 {
     public class ArticleStockResponse
     {

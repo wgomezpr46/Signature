@@ -1,8 +1,9 @@
-﻿namespace Signature.WebAPI.Entities.Requests
+﻿namespace Signature.Shared.Entities.Requests
 {
     public class DeliveryNotesRequestV2
     {
         #region Propiedades
+
         /// <summary>
         /// CodigoEmpresa
         /// </summary>
@@ -36,19 +37,17 @@
         #endregion
 
         #region Constructor
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
         public DeliveryNotesRequestV2()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private DeliveryNotesRequestV2(string _codigoEmpresa, string _proveedor)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             CodigoEmpresa = _codigoEmpresa;
             Proveedor = _proveedor;
         }
+
         #endregion
     }
 }

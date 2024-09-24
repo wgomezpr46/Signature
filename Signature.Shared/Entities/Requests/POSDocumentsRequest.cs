@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Signature.WebAPI.Entities.Requests
+namespace Signature.Shared.Entities.Requests
 {
-    public class POSDocumentsCOFORequest : IEquatable<POSDocumentsCOFORequest>
+    public class POSDocumentsRequest : IEquatable<POSDocumentsRequest>
     {
         #region Properties
 
@@ -62,9 +62,7 @@ namespace Signature.WebAPI.Entities.Requests
         /// Use Articulo.Builder() for instance creation instead.
         /// </summary>
         //[Obsolete]
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public POSDocumentsCOFORequest()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public POSDocumentsRequest()
         {
         }
         #endregion
@@ -99,8 +97,6 @@ namespace Signature.WebAPI.Entities.Requests
             [Required]
             public string ReferenceId { get; set; }
 
-            public string Description { get; set; }
-
             [Required]
             [RegularExpression(@"^(?!0\d|$)\d*(\.\d{1,2})?$", ErrorMessage = " El campo DiscountPercentage solo acepta valores numericos hasta con dos decimales, usando el caracter punto como separardor decimal. ")]
             public string DiscountPercentage { get; set; }
@@ -124,7 +120,6 @@ namespace Signature.WebAPI.Entities.Requests
                 UnitaryPriceWithTax = String.Empty;
                 TotalDiscountedAmount = String.Empty;
                 ReferenceId = String.Empty;
-                Description = String.Empty;
                 DiscountPercentage = String.Empty;
                 TaxPercentage = String.Empty;
                 TotalTaxAmount = String.Empty;
@@ -243,27 +238,14 @@ namespace Signature.WebAPI.Entities.Requests
         #endregion
 
         #region Methods
-#pragma warning disable S2190 // Recursion should not be infinite
         public override string ToString()
-#pragma warning restore S2190 // Recursion should not be infinite
         {
             return this.ToString();
         }
 
-#pragma warning disable S2190 // Recursion should not be infinite
-#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
-#pragma warning disable S4136 // Method overloads should be grouped together
         public override bool Equals(object obj)
-#pragma warning restore S4136 // Method overloads should be grouped together
-#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
-#pragma warning restore S2190 // Recursion should not be infinite
         {
             return this.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.GetHashCode();
         }
 
         public bool Equals(POSDocumentsRequest other)
@@ -271,13 +253,9 @@ namespace Signature.WebAPI.Entities.Requests
             return Equals((object)other);
         }
 
-        public bool Equals(POSDocumentsCOFORequest other)
+        public override int GetHashCode()
         {
-#pragma warning disable CS8604 // Possible null reference argument.
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-            return Equals((object)other);
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-#pragma warning restore CS8604 // Possible null reference argument.
+            return this.GetHashCode();
         }
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Signature.WebAPI.Models
+namespace Signature.Shared.Models
 {
     public class ErpDeliveryNotesHHLegacy
     {

@@ -1,4 +1,4 @@
-﻿namespace Signature.WebAPI.Entities.Requests
+﻿namespace Signature.Shared.Entities.Requests
 {
     public class SetAdjustmentsLossesRequest
     {
@@ -50,18 +50,14 @@
         #endregion
 
         #region Constructor
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public SetAdjustmentsLossesRequest()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             CompanyNum = string.Empty;
             User = string.Empty;
             AdjustmentsLosses = new List<AdjustmentsLosses>();
         }
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public SetAdjustmentsLossesRequest(string _companyNum, string _user, List<AdjustmentsLosses> _AdjustmentsLosses)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             CompanyNum = _companyNum;
             User = _user;
@@ -73,9 +69,7 @@
     /// <summary>
     /// AdjustementsLosses
     /// </summary>
-#pragma warning disable S4035 // Classes implementing "IEquatable<T>" should be sealed
     public class AdjustmentsLosses : IEquatable<AdjustmentsLosses>
-#pragma warning restore S4035 // Classes implementing "IEquatable<T>" should be sealed
     {
         #region Propiedades
         public int Id { get; set; }
@@ -97,9 +91,7 @@
         ///// <summary>
         ///// Use AdjustementsLosses.Builder() for instance creation instead.
         ///// </summary>
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public AdjustmentsLosses()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
 
@@ -169,23 +161,17 @@
 
         }
 
-#pragma warning disable S2190 // Recursion should not be infinite
         public override string ToString()
-#pragma warning restore S2190 // Recursion should not be infinite
         {
             return ToString();
         }
 
-#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         public override bool Equals(object obj)
-#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         {
             return Equals(obj);
         }
 
-#pragma warning disable CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
         public bool Equals(AdjustmentsLosses other)
-#pragma warning restore CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
         {
             return Equals((object)other);
         }
@@ -236,19 +222,14 @@
             private string _Warehouse;
             private decimal _Pvp;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
             internal AdjustmentsLossesBuilder()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
             {
                 SetupDefaults();
             }
 
-#pragma warning disable S1186 // Methods should not be empty
             private void SetupDefaults()
-#pragma warning restore S1186 // Methods should not be empty
             {
             }
-
 
             public AdjustmentsLossesBuilder Id(int value)
             {
@@ -256,13 +237,11 @@
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder NCompany(string value)
             {
                 _NCompany = value;
                 return this;
             }
-
 
             public AdjustmentsLossesBuilder Date(string value)
             {
@@ -270,20 +249,17 @@
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder Time(string value)
             {
                 _Time = value;
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder Article(string value)
             {
                 _Article = value;
                 return this;
             }
-
 
             public AdjustmentsLossesBuilder Units(int value)
             {
@@ -298,13 +274,11 @@
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder Reason(string value)
             {
                 _Reason = value;
                 return this;
             }
-
 
             public AdjustmentsLossesBuilder Observations(string value)
             {
@@ -312,13 +286,11 @@
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder Validated(bool value)
             {
                 _Validated = value;
                 return this;
             }
-
 
             public AdjustmentsLossesBuilder Store(string value)
             {
@@ -326,22 +298,17 @@
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder Warehouse(string value)
             {
                 _Warehouse = value;
                 return this;
             }
 
-
             public AdjustmentsLossesBuilder Pvp(decimal value)
             {
                 _Pvp = value;
                 return this;
             }
-
-
-
 
             /// <summary>
             /// Builds instance of AdjustementsLosses.

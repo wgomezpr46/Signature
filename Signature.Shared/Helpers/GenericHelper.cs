@@ -3,11 +3,9 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Signature.WebAPI.Helpers
+namespace Signature.Shared.Helpers
 {
-#pragma warning disable S1118 // Utility classes should not have public constructors
     public class GenericHelper
-#pragma warning restore S1118 // Utility classes should not have public constructors
     {
         /// <summary>
         /// Method to generate a security hash
@@ -15,18 +13,14 @@ namespace Signature.WebAPI.Helpers
         /// <param name="oHash"></param>
         /// <param name="sTimeStamp"></param>
         /// <returns></returns>
-        internal static string GeneratedSignatureWSAPITPV(Object oHash, String sTimeStamp)
+        public static string GeneratedSignatureWSAPITPV(Object oHash, String sTimeStamp)
         {
-#pragma warning disable CS8604 // Possible null reference argument.
             return GenericHelper.GenerateSHA256(OrderObjectPropertiesValuesAlphabetically(oHash) + sTimeStamp + "IntegracionAPI15032018");
-#pragma warning restore CS8604 // Possible null reference argument.
         }
 
-        internal static string GeneratedSignatureWSREST(Object oHash, String sTimeStamp)
+        public static string GeneratedSignatureWSREST(Object oHash, String sTimeStamp)
         {
-#pragma warning disable CS8604 // Possible null reference argument.
             return GenericHelper.GenerateSHA256(OrderObjectPropertiesValuesAlphabetically(oHash) + sTimeStamp + "IntegracionWSREST");
-#pragma warning restore CS8604 // Possible null reference argument.
         }
 
         /// <summary>
@@ -34,15 +28,15 @@ namespace Signature.WebAPI.Helpers
         /// </summary>
         /// <param name="stringToHash">string to hash</param>
         /// <returns>hashed string</returns>
-        internal static string GenerateSHA256(string stringToHash)
+        public static string GenerateSHA256(string stringToHash)
         {
-            string hashedString = null;
-
 #pragma warning disable SYSLIB0021 // Type or member is obsolete
             SHA256 mySHA256 = SHA256Managed.Create();
 #pragma warning restore SYSLIB0021 // Type or member is obsolete
+#pragma warning disable CA1850 // Prefer static 'HashData' method over 'ComputeHash'
             byte[] hashedSignature = mySHA256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(stringToHash));
-            hashedString = ByteArrayToHex(hashedSignature);
+#pragma warning restore CA1850 // Prefer static 'HashData' method over 'ComputeHash'
+            string hashedString = ByteArrayToHex(hashedSignature);
 
             return hashedString;
         }
@@ -54,16 +48,14 @@ namespace Signature.WebAPI.Helpers
         /// <returns>
         /// hex string
         /// </returns>
-        internal static string ByteArrayToHex(byte[] array)
+        public static string ByteArrayToHex(byte[] array)
         {
             if (array != null)
             {
                 return BitConverter.ToString(array).Replace("-", string.Empty);
             }
 
-#pragma warning disable CS8603 // Possible null reference return.
             return null;
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         /// <summary>
@@ -71,12 +63,14 @@ namespace Signature.WebAPI.Helpers
         /// </summary>
         /// <param name="obj">Object to process</param>
         /// <returns>Resulting concatenation string</returns>
-        internal static string OrderObjectPropertiesValuesAlphabetically(object obj)
+        public static string OrderObjectPropertiesValuesAlphabetically(object obj)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new();
             if (obj != null)
             {
+#pragma warning disable IDE0305 // Simplify collection initialization
                 List<PropertyInfo> props = obj.GetType().GetProperties().OrderBy(x => x.Name).ToList();
+#pragma warning restore IDE0305 // Simplify collection initialization
                 foreach (PropertyInfo pi in props)
                 {
                     if (pi.Name != "Signature")
@@ -108,7 +102,6 @@ namespace Signature.WebAPI.Helpers
                             }
                             else if (type.IsArray)
                             {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
                                 foreach (var p in (Array)pi.GetValue(obj, null))
                                 {
@@ -124,11 +117,9 @@ namespace Signature.WebAPI.Helpers
                                     }
                                 }
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
                             }
                             else if (type.IsGenericType)
                             {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
                                 foreach (var g in (IEnumerable)pi.GetValue(obj, null))
                                 {
@@ -144,7 +135,6 @@ namespace Signature.WebAPI.Helpers
                                     }
                                 }
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
                             }
                             else if (type.IsEnum)
                             {
@@ -154,9 +144,7 @@ namespace Signature.WebAPI.Helpers
                             }
                             else
                             {
-#pragma warning disable CS8604 // Possible null reference argument.
                                 result.Append(OrderObjectPropertiesValuesAlphabetically(pi.GetValue(obj, null)));
-#pragma warning restore CS8604 // Possible null reference argument.
                             }
                         }
                         string strProcesoif = result.ToString();
