@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Swashbuckle.Application;
+using System.Web.Http;
 
 namespace Signature.WebAPI2
 {
@@ -11,7 +12,9 @@ namespace Signature.WebAPI2
             // Web API routes
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(name: "RootApi", routeTemplate: "", defaults: new { controller = "Default", action = "Get" });
-            config.Routes.MapHttpRoute(name: "DefaultApi", routeTemplate: "api/{controller}/{action}", defaults: new { controller = "Default", action = "Get" });
+
+            // Configurar Swagger
+            config.EnableSwagger(c => { c.SingleApiVersion("v1", "Signature.WebAPI2"); }).EnableSwaggerUi();
         }
     }
 }

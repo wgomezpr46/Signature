@@ -11,6 +11,27 @@ namespace Signature.WebAPI2.Controllers
 {
     public class SignatureController : ApiController
     {
+        /// <summary>
+        /// Genera firma a partir de un payload enviado en el cuerpo de cada solicitud.
+        /// </summary>
+        /// <param name="request">Payload con datos necesarios para generar la firma.</param>
+        /// <param name="TimeStamp">Marca de tiempo de la solicitud en formato 'dd/MM/yyyy HH:mm:ss', Ejm: 20/09/2024 11:30:00.</param>
+        /// <param name="Endpoint">El endpoint que se está llamando, Ejm: /GetArticle</param>
+        /// <returns>retorna firma</returns>
+        /// <remarks>
+        /// Sample body request:
+        ///
+        ///     POST /GetArticle
+        ///     {
+        ///        "CodigoEmpresa": "69947",
+        ///        "CodigoEAN": "",
+        ///        "Referencia": "69947876673",
+        ///        "Caja": "6994701"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">SHA256 string signature.</response>
+        /// <response code="400">TimeStamp y Endpoint son obligatorios || Endpoint '{Endpoint}' no es válido.</response>
         // POST: api/Signature/GeneratedSignature
         [HttpPost]
         public IHttpActionResult GeneratedSignature([FromBody] Object request, [FromUri] string TimeStamp, [FromUri] string Endpoint)

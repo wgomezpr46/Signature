@@ -7,6 +7,8 @@ namespace Signature.WebAPI2
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            // Configurar Swagger
+            SwaggerConfig.Register();
         }
     }
 }
