@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Signature.WebAPI.Entities.Requests;
-using Signature.WebAPI.Helpers;
-using Signature.WebAPI.Models;
+using Signature.Shared.Entities.Requests;
+using Signature.Shared.Helpers;
+using Signature.Shared.Models;
 
 namespace Signature.WebAPI.Controllers
 {
@@ -14,7 +14,9 @@ namespace Signature.WebAPI.Controllers
         /// <summary>
         /// Genera firma a partir de un payload enviado en el cuerpo de cada solicitud.
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="request">Payload con datos necesarios para generar la firma.</param>
+        /// <param name="TimeStamp">Marca de tiempo de la solicitud en formato 'dd/MM/yyyy HH:mm:ss', Ejm: 20/09/2024 11:30:00.</param>
+        /// <param name="Endpoint">El endpoint que se está llamando, Ejm: /GetArticle</param>
         /// <returns>retorna firma</returns>
         /// <remarks>
         /// Sample body request:
@@ -32,7 +34,7 @@ namespace Signature.WebAPI.Controllers
         /// <response code="400">TimeStamp y Endpoint son obligatorios || Endpoint '{Endpoint}' no es válido.</response>
         // POST: api/Signature/GeneratedSignature
         [HttpPost]
-        public IActionResult GeneratedSignature([FromBody] Object request)
+        public IActionResult GeneratedSignature([FromBody] Object request, [FromQuery] string TimeStamp, [FromQuery] string Endpoint)
         {
             string sGenerateSignatureInput = string.Empty;
 
@@ -41,16 +43,34 @@ namespace Signature.WebAPI.Controllers
                 Request.Headers.TryGetValue("TimeStamp", out var strTimeStamp);
                 Request.Headers.TryGetValue("Endpoint", out var strEndpoint);
 
+                if ((!string.IsNullOrEmpty(strTimeStamp) || !string.IsNullOrEmpty(strEndpoint)) && (string.IsNullOrEmpty(TimeStamp) && string.IsNullOrEmpty(Endpoint)))
+                {
+                    TimeStamp = strTimeStamp;
+                    Endpoint = strEndpoint;
+                }
+
+                if ((!string.IsNullOrEmpty(TimeStamp) || !string.IsNullOrEmpty(Endpoint)) && (string.IsNullOrEmpty(strTimeStamp) && string.IsNullOrEmpty(strEndpoint)))
+                {
+                    strTimeStamp = TimeStamp;
+                    strEndpoint = Endpoint;
+                }
+
+                if (string.IsNullOrEmpty(strTimeStamp) && string.IsNullOrEmpty(strEndpoint))
+                {
+                    return BadRequest(new { error = "TimeStamp y Endpoint son obligatorios" });
+                }
                 if (string.IsNullOrEmpty(strTimeStamp) || string.IsNullOrEmpty(strEndpoint))
                 {
                     return BadRequest(new { error = "TimeStamp y Endpoint son obligatorios" });
                 }
 
+#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
                 var options = new System.Text.Json.JsonSerializerOptions
                 {
                     WriteIndented = true,
                     PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
                 };
+#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
 
                 string jsonString = System.Text.Json.JsonSerializer.Serialize(request, options);
 
