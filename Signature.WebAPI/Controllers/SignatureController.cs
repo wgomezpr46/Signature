@@ -155,12 +155,17 @@ namespace Signature.WebAPI.Controllers
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objTransactionStatusRequest, strTimeStamp);
                         break;
                     case "/api/DeliveryNotes/COFOSetDeliveryNotesHandHeld/request":
+                    case "/ilionservices4/custom/repsol/HandHeldWS_COFO/api/DeliveryNotes/COFOSetDeliveryNotesHandHeld/request":
                         var objErpDeliveryNotesHHLegacy = JsonConvert.DeserializeObject<ErpDeliveryNotesHHLegacy>(jsonString);
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objErpDeliveryNotesHHLegacy, strTimeStamp);
                         break;
                     case "/SupplierOrders/COFOSetSupplierOrdersConts/request":
                         var objSupplierOrders = JsonConvert.DeserializeObject<SupplierOrders>(jsonString);
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objSupplierOrders, strTimeStamp);
+                        break;
+                    case "/ilionservices4/custom/repsol/HandHeldWS_COFO/api/update/checkVersion":
+                        var objCheckVersionRequest = JsonConvert.DeserializeObject<CheckVersionRequest>(jsonString);
+                        sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objCheckVersionRequest, strTimeStamp);
                         break;
                     default:
                         return BadRequest(new { error = $"Endpoint '{strEndpoint}' no es válido" });
