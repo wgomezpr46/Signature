@@ -167,6 +167,10 @@ namespace Signature.WebAPI.Controllers
                         var objCheckVersionRequest = JsonConvert.DeserializeObject<CheckVersionRequest>(jsonString);
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objCheckVersionRequest, strTimeStamp);
                         break;
+                    case "/api/Trace/SetTraceV2/request":
+                        var objTraceAPI = JsonConvert.DeserializeObject<TracesAPI>(jsonString);
+                        sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objTraceAPI, strTimeStamp);
+                        break;
                     default:
                         return BadRequest(new { error = $"Endpoint '{strEndpoint}' no es válido" });
                 }
