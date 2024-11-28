@@ -103,6 +103,7 @@ namespace Signature.WebAPI.Controllers
                         break;
                     case "/SetTicket":
                     case "/SetRefundTicket":
+                    case "/ilionservices4/COFOWSAPITPV/SetTicket":
                         var objPOSDocumentsCOFORequest = JsonConvert.DeserializeObject<POSDocumentsCOFORequest>(jsonString);
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSAPITPV(objPOSDocumentsCOFORequest, strTimeStamp);
                         break;
@@ -168,6 +169,7 @@ namespace Signature.WebAPI.Controllers
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objCheckVersionRequest, strTimeStamp);
                         break;
                     case "/api/Trace/SetTraceV2/request":
+                    case "/ilionservices4/COFOWSInterface/api/Trace/SetTraceV2/request":
                         var objTraceAPI = JsonConvert.DeserializeObject<TracesAPI>(jsonString);
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objTraceAPI, strTimeStamp);
                         break;
