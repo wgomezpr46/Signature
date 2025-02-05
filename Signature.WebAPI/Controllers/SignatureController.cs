@@ -161,6 +161,7 @@ namespace Signature.WebAPI.Controllers
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objErpDeliveryNotesHHLegacy, strTimeStamp);
                         break;
                     case "/SupplierOrders/COFOSetSupplierOrdersConts/request":
+                    case "/ilionservices4/custom/repsol/HandHeldWS_COFO/api/SupplierOrders/COFOSetSupplierOrdersConts/request":
                         var objSupplierOrders = JsonConvert.DeserializeObject<SupplierOrders>(jsonString);
                         sGenerateSignatureInput = GenericHelper.GeneratedSignatureWSREST(objSupplierOrders, strTimeStamp);
                         break;
